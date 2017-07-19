@@ -1,5 +1,21 @@
+<style>
+	.color-red{
+		color:red;
+	}
+	.color-blue{
+		color:blue;
+	}
+	.is-loading{
+		background: green;
+	}
+</style>
 <div id="root">
-	<button @click="remove">Remove top name</button>
+	<h1 :class="className">Hello World</h1>
+	<button @click="remove" 
+		:title="title" 
+		:class="{'is-loading': isLoading}">
+		Remove top name
+	</button>
 	<ul>
 		<li v-for="name in names" v-text="name"></li>
 	</ul>
@@ -11,12 +27,16 @@
 	var app=new Vue({
 		el: "#root",
 		data: {
+			className: 'color-red',
+			isLoading: true,
+			title: 'Click to pop',
 			new_name: '',
 			names: ['Hung','Han','Anh','Em']
 		},
 		methods: {
 			remove: function(){
 				this.names.shift();
+				this.isLoading= !this.isLoading;
 			},
 			add(){				
 				this.names.push(this.new_name);
