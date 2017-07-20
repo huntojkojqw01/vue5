@@ -1,17 +1,9 @@
 <div id="root" class="container">
-	<cou @chem="applied"></cou>
-	<h1 v-show="noticeShow">Bạn vừa nhập cái gì đó</h1>
+	<cou></cou>	
+	<acp></acp>
 </div>
 <script>		
 	var app=new Vue({
-		el: "#root",
-		data:{
-			noticeShow: false
-		},
-		methods: {
-			applied(){
-				this.noticeShow=true;
-			}
-		}
+		el: "#root"		
 	});
 </script>
