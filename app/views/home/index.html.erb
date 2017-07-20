@@ -10,34 +10,17 @@
 	}
 </style>
 <div id="root" class="container">
-	<message title="Hello World" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></message>
-	<message title="Nguyen Dinh Hung" body="Kamejoko Ha ha ha"></message>
-	<!-- <task-list></task-list>
-	<h1 :class="className">Hello World</h1>
-	<button @click="remove" 
-		:title="title" 
-		:class="{'is-loading': isLoading}">
-		Remove top name
-	</button>
-	<ul>
-		<li v-for="name in names" v-text="name"></li>
-	</ul>
-	<input type="text" v-model="new_name">
-	<button @click="add">Add name</button>
-	<h2>All tasks</h2>
-	<ul>
-		<li v-for="task in tasks" v-text="task.description"></li>
-	</ul>
-	<h2>Incomplete tasks</h2>
-	<ul>
-		<li v-for="task in incompleteTasks" v-text="task.description"></li>
-	</ul> -->
+	<!-- <message title="Hello World" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></message>
+	<message title="Nguyen Dinh Hung" body="Kamejoko Ha ha ha"></message> -->
+	<modal v-show="showModal" @close="showModal=false"></modal>
+	<button @click="showModal = true">Show modal</button>
 </div>
 <script>
 		
 	var app=new Vue({
 		el: "#root",
 		data: {
+			showModal: false,
 			className: 'color-red',
 			isLoading: true,
 			title: 'Click to pop',
