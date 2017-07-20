@@ -10,10 +10,20 @@
 	}
 </style>
 <div id="root" class="container">
-	<!-- <message title="Hello World" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></message>
-	<message title="Nguyen Dinh Hung" body="Kamejoko Ha ha ha"></message> -->
-	<modal v-show="showModal" @close="showModal=false"></modal>
-	<button @click="showModal = true">Show modal</button>
+	<tabs>
+		<tab name="Tab mot" :selected="true">
+			<h1>Nguyen Dinh Hung</h1>
+		</tab>
+		<tab name="Tab hai">
+			<h1>Nguyen Dinh Han</h1>
+		</tab>
+		<tab name="Tab ba">
+			<h1>Nguyen Dinh Ba</h1>
+		</tab>
+		<tab name="Tab bon">
+			<h1>Nguyen Dinh Bon</h1>
+		</tab>		
+	</tabs>
 </div>
 <script>
 		

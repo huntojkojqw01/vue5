@@ -1,59 +1,44 @@
-// Vue.component('task-list',{
-// 	template: `
-// 		<div>
-// 			<task v-for="task in tasks">{{task.description}}</task>
-// 		</div>
-// 	`,
-// 	data: function(){
-// 		return {
-// 			tasks: [
-// 				{description: 'Task Mot',completed: true},
-// 				{description: 'Task Hai',completed: false},
-// 				{description: 'Task Ba',completed: true},
-// 				{description: 'Task Bon',completed: true},
-// 				{description: 'Task Nam',completed: false},
-// 				{description: 'Task Sau',completed: true}
-// 			]
-// 		}
-// 	}		
-// });
-// Vue.component('task',{
-// 	template: '<li><slot></slot></li>'
-// });
-// Vue.component('message',{
-// 	props: ['title','body'],
-// 	data(){
-// 		return {
-// 			isVisible: true
-// 		}
-// 	},
-// 	template: `
-// 		<article class="message" v-show="isVisible">
-// 		  <div class="message-header">
-// 		    <p>{{title}}</p>
-// 		    <button class="delete" @click="hideModal"></button>
-// 		  </div>
-// 		  <div class="message-body">
-// 				{{body}}
-// 		  </div>
-// 		</article>
-// 	`,
-// 	methods: {
-// 		hideModal(){
-// 			this.isVisible=false;
-// 		}
-// 	}
-// });
-Vue.component('modal',{	
+Vue.component('tabs',{
+	data(){
+		return {
+			tabs: []
+		}
+	},
 	template: `
-		<div class="modal is-active">
-		  <div class="modal-background"></div>
-		  <div class="modal-content">
-		  	<div class="box">
-		  		Any other Bulma elements you want
-		  	</div>
-		  </div>
-		  <button class="modal-close is-large" @click="$emit('close')"></button>
-		</div>
-	`
+		<div>
+			<div class="tabs">
+			  <ul>
+			    <li v-for="tab in tabs" :class="{'is-active': tab.isActive}"><a @click="tabselect(tab)">{{tab.name}}</a></li>			    
+			  </ul>
+			</div>
+			<div><slot></slot></div>
+		</div>	
+	`,
+	created(){
+		this.tabs=this.$children;//lấy dữ liệu từ chính con nó trogn slot
+	},
+	methods: {
+		tabselect(selectedTab){
+			this.tabs.forEach(tab=>{
+				tab.isActive=(tab.name==selectedTab.name);
+			});
+		}
+	}
+});
+Vue.component('tab',{
+	template: `
+		<div v-show="isActive"><slot></slot></div>
+	`,
+	props: {
+		name: {require: true},
+		selected: {default: false}
+	},
+	data(){
+		return {
+			isActive: false
+		}
+	},
+	mounted(){
+		this.isActive=this.selected;
+	}
 });
