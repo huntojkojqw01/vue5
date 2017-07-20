@@ -1,8 +1,10 @@
 <div id="root" class="container">
-	<modal>
-		<h1 slot="header">Hero Nguyen</h1>
-		<p slot="body">Day la noi dung</p>
-	</modal>
+	<hero inline-template>
+		<div>
+			<h1>This is inline template with {{message}}</h1>
+			<button @click="message+=10">Cong them</button>
+		</div>				
+	</hero>
 </div>
 <script>		
 	var app=new Vue({
