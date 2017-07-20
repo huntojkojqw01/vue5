@@ -1,13 +1,23 @@
-<div id="root" class="container">
-	<hero inline-template>
-		<div>
-			<h1>This is inline template with {{message}}</h1>
-			<button @click="message+=10">Cong them</button>
-		</div>				
-	</hero>
+<div id="root" class="container">	
+	<h2>All persons</h2>
+	<ul>
+		<li v-for="person in persons">{{person.name}}</li>
+	</ul>
 </div>
-<script>		
+<script>
+	Vue.prototype.$http=axios;		
 	var app=new Vue({
-		el: "#root"		
+		el: "#root",
+		data:{
+			persons: []
+		},
+		mounted(){
+			this.$http.get("/getData.json")
+			.then(res=>{
+				console.log(res.data);
+				this.persons=res.data;
+			})
+			.catch(err=>console.log(err));
+		}			
 	});
 </script>
