@@ -1,51 +1,25 @@
-window.Event=new class {
-	constructor(){
-		this.vue=new Vue();
-	}
-	kick(event,data=null){
-		this.vue.$emit(event,data);
-	}
-	listen(event,callback){
-		this.vue.$on(event,callback);
-	}
-}
-Vue.component('cou',{
-	template: '<div>Cou<input @change="send" v-model="content"><p>{{receive}}</p></div>',
-	data(){
-		return {
-			receive: "",
-			content: ""
-		}
-	},
-	methods:{
-		send(){
-			Event.kick('cou-send',this.content);
-		},
-		recv(mess){
-			this.receive=mess;
-		}
-	},
-	created(){
-		Event.listen('acp-send',this.recv);
-	}
-});
-Vue.component('acp',{
-	template: '<div>Acp<input @change="send" v-model="content"><p>{{receive}}</p></div>',
-	data(){
-		return {
-			receive: "",
-			content: ""
-		}
-	},
-	methods:{
-		send(){
-			Event.kick('acp-send',this.content);
-		},
-		recv(mess){
-			this.receive=mess;
-		}
-	},
-	created(){
-		Event.listen('cou-send',this.recv);
-	}
+Vue.component('modal',{
+	template: `
+		<div class="modal is-active">
+		  <div class="modal-background"></div>
+		  <div class="modal-card">
+		    <header class="modal-card-head">
+		      <p class="modal-card-title">
+		      	<slot name="header"></slot>
+		      </p>
+		      <button class="delete"></button>
+		    </header>
+		    <section class="modal-card-body">
+		      <slot name="body"></slot>
+		      <slot>
+		      	default content here
+		      </slot>
+		    </section>
+		    <footer class="modal-card-foot">
+		      <a class="button is-success">Save changes</a>
+		      <a class="button">Cancel</a>
+		    </footer>
+		  </div>
+		</div>
+	`
 });
